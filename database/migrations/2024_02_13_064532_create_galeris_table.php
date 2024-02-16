@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_album')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->timestamps();
+
+            $table->foreign('id_user')->references('id_user')->on('users');
         });
     }
 

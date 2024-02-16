@@ -13,4 +13,8 @@ class User extends Model implements Authenticatable
     protected $primaryKey = 'id_user';
     protected $guarded = ['id_user'];
     public $timestamps = false;
+
+    public function galeri(){
+        return $this->hasMany(Galeri::class, 'id_user', 'id_user');
+    }
 }

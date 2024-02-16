@@ -24,11 +24,15 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    
+
     Route::controller(GaleriController::class)->group(function(){
         Route::get('/profile', 'index');
         Route::get('/newImage', 'create');
         Route::post('/newImage', 'store');
+        Route::get('/edit/{id_foto}/{username}', 'edit');
+        Route::get('/detailFoto/{id_foto}', 'show');
+        Route::put('/edit/{id_foto}', 'update');
+        Route::delete('/delete/{id_foto}', 'destroy');
 
     });
     Route::get('/', [UserController::class, 'index']);

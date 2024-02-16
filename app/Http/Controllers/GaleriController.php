@@ -6,6 +6,7 @@ use App\Models\Galeri;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
@@ -16,7 +17,8 @@ class GaleriController extends Controller
     {
         $title = 'Profile';
         $user = User::where('id_user', auth()->id())->first();
-        return view('galeri.index', compact('title', 'user'));
+        $foto = Galeri::where('id_user', auth()->id())->get();
+        return view('galeri.index', compact('title', 'user', 'foto'));
     }
 
     /**
@@ -51,32 +53,50 @@ class GaleriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Galeri $galeri)
+    public function show(Galeri $id_foto)
     {
-        //
+        $title = 'Detail foto';
+        $foto = $id_foto;
+        return view('galeri.detail', compact('title', 'foto'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Galeri $galeri)
+    public function edit(Galeri $id_foto)
     {
-        //
+        $foto = $id_foto;
+        $title = 'Edit Foto';
+        return view('galeri.edit', compact('foto', 'title'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGaleriRequest $request, Galeri $galeri)
+    public function update(UpdateGaleriRequest $request, Galeri $id_foto)
     {
-        //
+        // dd($id_foto);
+        $data = [
+            'judul_foto' => request('title'),
+            'deskripsi_foto' => request('describe')
+        ];
+
+        $id_foto->update($data);
+        session()->flash('berhasil', 'Update Success');
+        return redirect('/profile');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Galeri $galeri)
+    public function destroy(Galeri $id_foto)
     {
-        //
+        Storage::delete($id_foto->path_foto);
+        $id_foto->destroy($id_foto->id_foto);
+
+        session()->flash('Berhasil', 'Delete foto success');
+        return redirect('/profile');
     }
 }

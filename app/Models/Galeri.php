@@ -10,4 +10,8 @@ class Galeri extends Model
     use HasFactory;
     protected $primaryKey = 'id_foto';
     protected $guarded = ['id_foto'];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
+    }
 }
