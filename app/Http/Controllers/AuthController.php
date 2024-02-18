@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
-{   
+{
     public function signin(){
         $user = User::where('username', request('username'))->first();
 
@@ -32,11 +32,12 @@ class AuthController extends Controller
     }
     public function signup(){
         // dd(request());
-
+        // $foto = request()->file('profile');
         $data = [
             'fullname' => request('fullname'),
             'username' => request('username'),
             'email' => request('email'),
+            'profile' => request('profile'),
             'password' => Hash::make(request('password')),
             'alamat' => request('alamat')
         ];

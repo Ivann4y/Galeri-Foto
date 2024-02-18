@@ -16,6 +16,7 @@ return new class extends Migration
                 $table->string('username');
                 $table->string('fullname');
                 $table->string('email');
+                $table->string('profile');
                 $table->string('password');
                 $table->string('alamat');
         });
