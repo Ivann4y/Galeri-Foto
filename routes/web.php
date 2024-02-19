@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,14 @@ Route::middleware('auth')->group(function(){
     Route::get('/', [UserController::class, 'index']);
     Route::get('/signout', [AuthController::class, 'signout']);
     Route::post('/signout', [AuthController::class, 'signout']);
+
+    Route::controller(AlbumController::class)->group(function(){
+        Route::get('/albums','index');
+        Route::get('/create','create');
+
+    });
+
+
 });
 
 

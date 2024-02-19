@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($data)) {
             request()->session()->regenerate();
-            return redirect()->intended();
+            return redirect()->intended('/');
         } else {
             session()->flash('Gagal', 'Username and Password invalid');
             return back();
@@ -32,12 +32,11 @@ class AuthController extends Controller
     }
     public function signup(){
         // dd(request());
-        // $foto = request()->file('profile');
+        $foto = request()->file('profile');
         $data = [
             'fullname' => request('fullname'),
             'username' => request('username'),
             'email' => request('email'),
-            'profile' => request('profile'),
             'password' => Hash::make(request('password')),
             'alamat' => request('alamat')
         ];

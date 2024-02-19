@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Galeri;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
+use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
