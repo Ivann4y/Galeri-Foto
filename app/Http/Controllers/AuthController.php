@@ -32,7 +32,7 @@ class AuthController extends Controller
     }
     public function signup(){
         // dd(request());
-        $foto = request()->file('profile');
+        // $foto = request()->file('profile');
         $data = [
             'fullname' => request('fullname'),
             'username' => request('username'),

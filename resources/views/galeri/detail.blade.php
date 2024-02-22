@@ -3,7 +3,7 @@
     <div class="flex gap-5">
         <div
             class="max-w-md">
-            <img class="object-cover w-[500px] h-[500px]"
+            <img class="object-cover w-[400px] h-[400px]"
                 src="{{ asset('storage/' . $foto->path_foto) }}" alt="">
         </div>
         <div>

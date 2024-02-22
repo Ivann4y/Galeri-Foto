@@ -16,7 +16,8 @@ class UserController extends Controller
     {
         $title = 'Home';
         $foto = Galeri::latest()->get();
-        return view('user.index', compact('title', 'foto'));
+        $pp = User::where('id_user', auth()->id())->get();
+        return view('user.index', compact('title', 'foto', 'pp'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+
     }
 
     /**
@@ -46,17 +47,26 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $id_user)
     {
-        //
+        $pp = $id_user;
+        $title = 'Add Profil';
+        return view('user.editProfil', compact('title', 'pp'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $id_user)
     {
-        //
+        $profil = request()->file('profil');
+        $data = [
+            'pp_user' => $profil->store(auth()->id())
+        ];
+
+        $id_user->update($data);
+        session()->flash('Berhasil', 'Edit Profil Success');
+        return redirect('/profile');
     }
 
     /**

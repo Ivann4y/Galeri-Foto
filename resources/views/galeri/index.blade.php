@@ -3,8 +3,10 @@
         <div
             class="object-left ml-5 mb-14 bg-white rounded-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-2">
             <div class="py-8 px-8 max-auto">
-                <img class="block h-28 w-28 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEwWiL7wBcIZIiNm-UFxKGTRf6Gcefdw2aAg&usqp=CAU"
-                    alt="{{ $user->fullname }}" />
+                @foreach ($profil as $item)
+                <img class="block h-28 w-28 rounded-full" src="{{ asset('storage/' . $item->pp_user) }}"
+                alt="" />
+                @endforeach
             </div>
             <div class="flex items-center sm:text-left">
                 <div class="space-y-0.5">
@@ -24,13 +26,16 @@
                     <p class="text-slate-500 font-medium">
                         {{ $user->fullname }}
                     </p>
+                    <a href="/editProfil/{{ $user->id_user }}/{{ $user->username }}">
+                        <button type="submit" class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Profil</button>
+                    </a>
                 </div>
             </div>
         </div>
-    <div class="grid grid-cols-4 gap-2 ml-5">
+    <div class="grid grid-cols-4 gap-4 ml-5">
         @foreach ($foto as $f)
             <a href="/edit/{{ $f->id_foto }}/{{ $f->user->username }}" class="bg-gray-300">
-                <img src="{{ asset('storage/' . $f->path_foto) }}" alt="{{ $f->judul_foto }}" class="h-full object-cover">
+                    <img src="{{ asset('storage/' . $f->path_foto) }}" alt="{{ $f->judul_foto }}" class="h-full object-cover">
             </a>
         @endforeach
     </div>

@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->string('email');
                 $table->string('password');
                 $table->string('alamat');
+                $table->string('pp_user')->nullable();
         });
     }
 

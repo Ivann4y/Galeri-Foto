@@ -19,7 +19,9 @@ class GaleriController extends Controller
         $title = 'Profile';
         $user = User::where('id_user', auth()->id())->first();
         $foto = Galeri::where('id_user', auth()->id())->get();
-        return view('galeri.index', compact('title', 'user', 'foto'));
+        $profil = User::where('id_user', auth()->id())->get();
+        // dd($profil);
+        return view('galeri.index', compact('title', 'user', 'foto', 'profil'));
     }
 
     /**

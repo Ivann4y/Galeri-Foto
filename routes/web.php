@@ -38,8 +38,10 @@ Route::middleware('auth')->group(function(){
 
     });
     Route::get('/', [UserController::class, 'index']);
-    Route::get('/signout', [AuthController::class, 'signout']);
+    // Route::get('/signout', [AuthController::class, 'signout']);
     Route::post('/signout', [AuthController::class, 'signout']);
+    Route::get('/editProfil/{id_user}/{username}',[UserController::class, 'edit']);
+    Route::put('/editProfil/{id_user}',[UserController::class, 'update']);
 
     Route::controller(AlbumController::class)->group(function(){
         Route::get('/albums','index');
