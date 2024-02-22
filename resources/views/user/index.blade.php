@@ -5,18 +5,19 @@
         @foreach ($foto as $f)
             <div class="border-4 rounded-lg">
                 <div class="flex mb-5 text-sm mx-2 my-2">
-                    @foreach ($pp as $item)
-                    <div>
-                        <img class="rounded-full h-10 w-10 mr-3"
-                        src="{{ asset('storage/' . $item->pp_user) }}"
-                            alt="{{ $item->username }}">
-                    </div>
-                        @endforeach
+                        @if ($f->user->pp_user)
+                            <img class="w-10 mr-1 h-10 rounded-full" src="{{ asset('storage/' . $f->user->pp_user) }}" alt="user photo">
+                        @else
+                            <img class="w-10 mr-1 h-10 rounded-full"
+                                src="https://th.bing.com/th/id/OIP.WObojLGEnOeoiPB6Y1bfJwAAAA?w=269&h=196&c=7&r=0&o=5&pid=1.7"
+                                alt="user photo">
+                        @endif
                     <p class="font-semibold mt-2">
                         <b>{{ $f->user->username }}</b>
                     </p>
                     <p class="mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" fill="currentColor" class="w-6 h-6 mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" fill="currentColor"
+                            class="w-6 h-6 mr-2">
                             <path fill-rule="evenodd"
                                 d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
                                 clip-rule="evenodd" />

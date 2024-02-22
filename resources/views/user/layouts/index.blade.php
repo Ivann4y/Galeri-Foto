@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    @include('user.layouts.sidebar')
+    @include('user.layouts.sidenavbar')
     <div class="p-4 sm:ml-64">
-        <div class="p-4">
+        <div class="p-4 mt-14">
             @yield('content')
         </div>
     </div>

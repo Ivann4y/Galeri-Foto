@@ -17,7 +17,7 @@ class GaleriController extends Controller
     public function index()
     {
         $title = 'Profile';
-        $user = User::where('id_user', auth()->id())->first();
+        $user = User::where('id_user', auth()->id())->first(); 
         $foto = Galeri::where('id_user', auth()->id())->get();
         $profil = User::where('id_user', auth()->id())->get();
         // dd($profil);
@@ -30,7 +30,9 @@ class GaleriController extends Controller
     public function create()
     {
         $title = 'Create new post';
-        return view('galeri.create', compact('title'));
+        $user = User::where('id_user', auth()->id())->first(); 
+        $profil = User::where('id_user', auth()->id())->get();
+        return view('galeri.create', compact('title', 'user', 'profil'));
     }
 
     /**
@@ -60,7 +62,9 @@ class GaleriController extends Controller
     {
         $title = 'Detail foto';
         $foto = $id_foto;
-        return view('galeri.detail', compact('title', 'foto'));
+        $user = User::where('id_user', auth()->id())->first(); 
+        $profil = User::where('id_user', auth()->id())->get();
+        return view('galeri.detail', compact('title', 'foto', 'user','profil'));
     }
 
     /**
@@ -70,7 +74,9 @@ class GaleriController extends Controller
     {
         $foto = $id_foto;
         $title = 'Edit Foto';
-        return view('galeri.edit', compact('foto', 'title'));
+        $user = User::where('id_user', auth()->id())->first(); 
+        $profil = User::where('id_user', auth()->id())->get();
+        return view('galeri.edit', compact('foto', 'title', 'user', 'profil'));
 
     }
 

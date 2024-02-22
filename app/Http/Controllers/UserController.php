@@ -16,8 +16,9 @@ class UserController extends Controller
     {
         $title = 'Home';
         $foto = Galeri::latest()->get();
-        $pp = User::where('id_user', auth()->id())->get();
-        return view('user.index', compact('title', 'foto', 'pp'));
+        $profil = User::where('id_user', auth()->id())->get();
+        $user = User::where('id_user', auth()->id())->first();
+        return view('user.index', compact('title', 'foto', 'profil', 'user'));
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -51,7 +52,9 @@ class UserController extends Controller
     {
         $pp = $id_user;
         $title = 'Add Profil';
-        return view('user.editProfil', compact('title', 'pp'));
+        $profil = User::where('id_user', auth()->id())->get();
+        $user = User::where('id_user', auth()->id())->first();
+        return view('user.editProfil', compact('title', 'pp', 'profil', 'user'));
     }
 
     /**

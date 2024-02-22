@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
 use App\Models\Galeri;
+use App\Models\User;
 
 class AlbumController extends Controller
 {
@@ -15,7 +16,9 @@ class AlbumController extends Controller
     public function index()
     {
         $title = 'Album';
-        return view('Album.index', compact('title'));
+        $profil = User::where('id_user', auth()->id())->get();
+        $user = User::where('id_user', auth()->id())->first();
+        return view('Album.index', compact('title', 'profil', 'user'));
     }
 
     /**
