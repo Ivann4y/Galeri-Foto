@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Galeri;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
+use App\Models\Album;
 use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -73,10 +74,12 @@ class GaleriController extends Controller
     public function edit(Galeri $id_foto)
     {
         $foto = $id_foto;
+        $galeri = Galeri::where('id_user', auth()->id())->first();  
         $title = 'Edit Foto';
         $user = User::where('id_user', auth()->id())->first(); 
         $profil = User::where('id_user', auth()->id())->get();
-        return view('galeri.edit', compact('foto', 'title', 'user', 'profil'));
+        $album = Album::where('id_user', auth()->id())->get();
+        return view('galeri.edit', compact('foto', 'title', 'user', 'profil', 'album'));
 
     }
 
@@ -88,7 +91,8 @@ class GaleriController extends Controller
         // dd($id_foto);
         $data = [
             'judul_foto' => request('title'),
-            'deskripsi_foto' => request('describe')
+            'deskripsi_foto' => request('describe'),
+            'id_album' => request('album')
         ];
 
         $id_foto->update($data);

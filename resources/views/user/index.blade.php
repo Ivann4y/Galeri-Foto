@@ -5,13 +5,14 @@
         @foreach ($foto as $f)
             <div class="border-4 rounded-lg">
                 <div class="flex mb-5 text-sm mx-2 my-2">
-                        @if ($f->user->pp_user)
-                            <img class="w-10 mr-1 h-10 rounded-full" src="{{ asset('storage/' . $f->user->pp_user) }}" alt="user photo">
-                        @else
-                            <img class="w-10 mr-1 h-10 rounded-full"
-                                src="https://th.bing.com/th/id/OIP.WObojLGEnOeoiPB6Y1bfJwAAAA?w=269&h=196&c=7&r=0&o=5&pid=1.7"
-                                alt="user photo">
-                        @endif
+                    @if ($f->user->pp_user)
+                        <img class="w-10 mr-1 h-10 rounded-full" src="{{ asset('storage/' . $f->user->pp_user) }}"
+                            alt="user photo">
+                    @else
+                        <img class="w-10 mr-1 h-10 rounded-full"
+                            src="https://th.bing.com/th/id/OIP.WObojLGEnOeoiPB6Y1bfJwAAAA?w=269&h=196&c=7&r=0&o=5&pid=1.7"
+                            alt="user photo">
+                    @endif
                     <p class="font-semibold mt-2">
                         <b>{{ $f->user->username }}</b>
                     </p>

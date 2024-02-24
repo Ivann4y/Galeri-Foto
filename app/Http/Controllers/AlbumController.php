@@ -18,7 +18,8 @@ class AlbumController extends Controller
         $title = 'Album';
         $profil = User::where('id_user', auth()->id())->get();
         $user = User::where('id_user', auth()->id())->first();
-        return view('Album.index', compact('title', 'profil', 'user'));
+        $album = Album::where('id_user', auth()->id())->get();
+        return view('Album.index', compact('title', 'profil', 'user', 'album'));
     }
 
     /**
@@ -28,7 +29,9 @@ class AlbumController extends Controller
     {
         $title = 'Create Album';
         $foto = Galeri::where('id_user', auth()->id())->get();
-        return view('album.create', compact('title', 'foto'));
+        $profil = User::where('id_user', auth()->id())->get();
+        $user = User::where('id_user', auth()->id())->first();
+        return view('album.create', compact('title', 'foto', 'profil', 'user'));
     }
 
     /**
@@ -36,15 +39,29 @@ class AlbumController extends Controller
      */
     public function store(StoreAlbumRequest $request)
     {
-        //
+        $data = [
+            'nama_album' => request('nama'),
+            'deskripsi' => request('deskripsi'),
+            'id_user' => auth()->id()
+        ];
+
+        Album::create($data);
+        session()->flash('Berhasil', 'Add album success');
+        return redirect('/albums');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
+    public function show(string $id_album)
     {
-        //
+        $title = 'Detaill Album';
+        $album = Album::with(['user', 'galeri'])->find($id_album);
+        $foto = Galeri::with('user')->get();
+        $user = User::where('id_user', auth()->id())->first();
+        $profil = User::where('id_user', auth()->id())->get();
+        // dd($album);
+        return view('album.detail', compact('title', 'album', 'user', 'profil', 'foto'));
     }
 
     /**

@@ -45,8 +45,10 @@ Route::middleware('auth')->group(function(){
 
     Route::controller(AlbumController::class)->group(function(){
         Route::get('/albums','index');
-        Route::get('/create','create');
-
+        Route::get('/addAlbum','create');
+        Route::post('/addAlbum','store');
+        Route::get('/detailAlbum/{id_album}', 'show');
+        
     });
 
 

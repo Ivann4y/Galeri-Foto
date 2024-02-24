@@ -17,4 +17,8 @@ class User extends Model implements Authenticatable
     public function galeri(){
         return $this->hasMany(Galeri::class, 'id_user', 'id_user');
     }
+
+    public function album(){
+        return $this->hasMany(Album::class, 'id_user', 'id_user');
+    }
 }
