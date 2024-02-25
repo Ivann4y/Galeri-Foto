@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,13 +43,14 @@ Route::middleware('auth')->group(function(){
     Route::post('/signout', [AuthController::class, 'signout']);
     Route::get('/editProfil/{id_user}/{username}',[UserController::class, 'edit']);
     Route::put('/editProfil/{id_user}',[UserController::class, 'update']);
+    Route::post('/like/{id_foto}', [LikeController::class, 'store']);
 
     Route::controller(AlbumController::class)->group(function(){
         Route::get('/albums','index');
         Route::get('/addAlbum','create');
         Route::post('/addAlbum','store');
         Route::get('/detailAlbum/{id_album}', 'show');
-        
+
     });
 
 

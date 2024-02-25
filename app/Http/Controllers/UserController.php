@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Galeri;
+use App\Models\Like;
 
 class UserController extends Controller
 {
@@ -18,7 +19,13 @@ class UserController extends Controller
         $foto = Galeri::latest()->get();
         $profil = User::where('id_user', auth()->id())->get();
         $user = User::where('id_user', auth()->id())->first();
-        return view('user.index', compact('title', 'foto', 'profil', 'user'));
+        $galeri = Galeri::where('id_user', auth()->id())->first();
+        $like = [];
+        if ($galeri) {
+            $like = Like::where('id_foto', $galeri->id_foto)->where('id_user', auth()->id())->first();
+        }
+        
+        return view('user.index', compact('title', 'foto', 'profil', 'user', 'galeri', 'like'));
     }
 
     /**

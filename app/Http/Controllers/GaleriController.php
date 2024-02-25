@@ -6,6 +6,7 @@ use App\Models\Galeri;
 use App\Http\Requests\StoreGaleriRequest;
 use App\Http\Requests\UpdateGaleriRequest;
 use App\Models\Album;
+use App\Models\Like;
 use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -19,10 +20,12 @@ class GaleriController extends Controller
     {
         $title = 'Profile';
         $user = User::where('id_user', auth()->id())->first(); 
-        $foto = Galeri::where('id_user', auth()->id())->get();
+        $foto = Galeri::latest()->get();
         $profil = User::where('id_user', auth()->id())->get();
+        $countfoto = Galeri::where('id_user', auth()->id())->count();
+        $countlike = Like::where('id_user', auth()->id())->count();
         // dd($profil);
-        return view('galeri.index', compact('title', 'user', 'foto', 'profil'));
+        return view('galeri.index', compact('title', 'user', 'foto', 'profil', 'countfoto', 'countlike'));
     }
 
     /**

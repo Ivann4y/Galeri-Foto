@@ -21,4 +21,8 @@ class User extends Model implements Authenticatable
     public function album(){
         return $this->hasMany(Album::class, 'id_user', 'id_user');
     }
+
+    public function like(){
+        return $this->hasMany(Like::class, 'id_user', 'id_user');
+    }
 }

@@ -1,7 +1,7 @@
 @extends('user.layouts.index')
 
 @section('content')
-    <div class="grid grid-cols-1 place-items-center space-y-10 w-full">
+    <div class="grid grid-cols-1 place-items-center space-y-10 w-full mr-50">
         @foreach ($foto as $f)
             <div class="border-4 rounded-lg">
                 <div class="flex mb-5 text-sm mx-2 my-2">
@@ -28,18 +28,21 @@
                         <b class="mr-2">•</b>{{ $f->created_at->diffForHumans() }}
                     </p>
                 </div>
-                <div class="h-auto w-auto">
-                    <img class="h-[400px] w-[400px] object-cover" src="{{ asset('storage/' . $f->path_foto) }}"
+                <div class="">
+                    <img class="w-[500px] h-[500px] object-cover" src="{{ asset('storage/' . $f->path_foto) }}"
                         alt="{{ $f->judul_foto }}">
                 </div>
                 <div class="ml-2 mt-2 flex">
-                    <a href="" class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                    </a>
+                    <form method="POST" enctype="multipart/form-data" action="/like/{{ $galeri->id_foto }}" class="">
+                        @csrf
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="{{ $like ? 'red' : 'none' }}" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        </button>
+                    </form>
                     <a href="/detailFoto/{{ $f->id_foto }}"
                         class="text-xl pb-px grid place-content-center rounded-full h-6 w-6 ml-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
