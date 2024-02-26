@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function(){
         Route::get('/addAlbum','create');
         Route::post('/addAlbum','store');
         Route::get('/detailAlbum/{id_album}', 'show');
+        Route::get('/editAlbum/{id_album}/{username}', 'edit');
+        Route::put('/editAlbum/{id_album}', 'update');
+        Route::delete('/deleteAlbum/{id_album}', 'destroy');
 
     });
 
